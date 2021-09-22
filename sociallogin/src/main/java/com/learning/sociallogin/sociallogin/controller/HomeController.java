@@ -17,7 +17,12 @@ public class HomeController {
             String name = principal.getAttribute("name");
             log.info(name + " Has logged in the system");
             model.addAttribute("name",name);
+            log.info(principal.toString());
         }
         return "home";
+    }
+    @GetMapping("/test")
+    public String testAPi(){
+        return "Test api working";
     }
 }
