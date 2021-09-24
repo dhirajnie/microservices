@@ -3,7 +3,7 @@ import { Inject, inject, Injector, NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductService } from './services/product.service';
 
 import { Routes, RouterModule, Router} from '@angular/router';
@@ -18,7 +18,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
-
+import {AuthinterceptorService} from './services/authinterceptor.service';
 
 import {
   OKTA_CONFIG,
@@ -75,7 +75,8 @@ const routes: Routes = [
     OktaAuthModule
   ],
   providers: [ProductService,
-     {provide:OKTA_CONFIG,useValue:oktaConfig}
+     {provide:OKTA_CONFIG,useValue:oktaConfig},
+     {provide:HTTP_INTERCEPTORS,useClass:AuthinterceptorService,multi:true}
     ],
   bootstrap: [AppComponent]
 })
