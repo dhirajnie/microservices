@@ -14,5 +14,7 @@ public class UserController {
         log.info("Request recived for user "+userId);
 
         return "API working "+userId;
+
+
     }
 }
